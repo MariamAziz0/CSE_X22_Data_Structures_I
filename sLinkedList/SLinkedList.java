@@ -86,8 +86,8 @@ public class SLinkedList {
 	}
 	
 	public void delete(int index) {
-		if (index < 0) {									
-			System.out.println("Error: Index smaller than 0");
+		if (index < 0 || index >= size) {									
+			System.out.println("Error: Out of Range.");
 			 return;
 		} else {
 			if(index == 0) {		// inserting at the beginning
@@ -112,8 +112,7 @@ public class SLinkedList {
 			 } else if (currentIndex == index-1 && currentNode.getNext() == null) { 		// Inserting at the end (Extending the size)
 				 currentNode.setNext(null);
 				 this.size--;
-			 } else 
-				 System.out.println("Error: Out of Range");
+			 } 
 		}
 	}
 	
