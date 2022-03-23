@@ -3,7 +3,7 @@ package Practicing.sLinkedList;
 public class Main {
 
 	public static void main(String[] args) {
-		Node myFirstNode = new Node("George",null);
+		Node myFirstNode = new Node(null,null);
 		SLinkedList myList = new SLinkedList(myFirstNode);
 		myList.show();
 		myList.insert("Youssef");
