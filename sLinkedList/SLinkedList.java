@@ -116,6 +116,20 @@ public class SLinkedList {
 				 System.out.println("Error: Out of Range");
 		}
 	}
+	
+	public void search(String s) {
+		Node currentNode = head;
+		int currentIndex = 0;
+		while(currentNode.getElement() != s && currentNode.getNext() != null) {
+			currentNode = currentNode.getNext();
+			currentIndex++;
+		}
+		if(currentNode.getElement() == s)
+			System.out.println("Element Found at index = " + currentIndex);
+		else
+			System.out.println("Element Not Found.");
+	}
+	
 	public void show() {
 		Node currentNode = this.head;
 		if(currentNode.getElement() != null){
