@@ -43,7 +43,10 @@ public class SLinkedList {
 	
 	public void insert(String newS) {
 		Node newN = new Node(newS,null);
-		this.getLast().setNext(newN);
+		if(this.getSize() != 0)
+			this.getLast().setNext(newN);
+		else
+			head = newN;
 		this.size++;
 	}
 	public void insertAt(String newS,int index) {
