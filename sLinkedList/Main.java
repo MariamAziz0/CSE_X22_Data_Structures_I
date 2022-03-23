@@ -16,6 +16,7 @@ public class Main {
 		myList.insertAtStart("Joseph");
 		myList.show();
 		System.out.println(myList.getHead().toString());
+		myList.search("George");
 		myList.delete(3);
 		myList.show();
 		myList.delete(0);
