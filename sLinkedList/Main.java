@@ -19,6 +19,7 @@ public class Main {
 		myList.search("George");
 		myList.delete(3);
 		myList.show();
+		myList.searchByIndex(2);
 		myList.delete(0);
 		myList.show();
 		myList.delete(2);
