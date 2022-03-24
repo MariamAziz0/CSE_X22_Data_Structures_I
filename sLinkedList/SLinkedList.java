@@ -116,7 +116,28 @@ public class SLinkedList {
 		}
 	}
 	
+	public void searchByIndex(int index) {
+		if(index < 0 || index >= size) {
+			System.out.println("Error: Out of Range");
+			return;
+		}
+		else {
+			int  currentIndex = 0;
+			Node currentNode = head;
+			while(currentIndex != index && currentIndex < size) {
+				currentIndex++;
+				currentNode = currentNode.getNext();
+			}
+			if(currentIndex == index)
+				System.out.println("Element at index " + index + " is ->> " + currentNode.getElement());
+		}	
+	}
+	
 	public void search(String s) {
+		if(size == 0) {
+			System.out.println("Error: SLinked List is EMPTY.");
+			return;
+		}
 		Node currentNode = head;
 		int currentIndex = 0;
 		while(currentNode.getElement() != s && currentNode.getNext() != null) {
