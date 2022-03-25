@@ -137,6 +137,10 @@ public class SingleLinkedList implements ILinkedList {
   		case "addToIndex":
   			index = sc.nextInt();
   			x = sc.nextInt();
+  			if(index >= (int)myList.getSize()) {
+  				System.out.println("Error");
+  				break;
+  			}
   			myList.add(index,x);
   			myList.show();
   			break;
@@ -151,6 +155,10 @@ public class SingleLinkedList implements ILinkedList {
   		case "set":
   			index = sc.nextInt();
   			x = sc.nextInt();
+  			if(index >= (int)myList.getSize()) {
+  				System.out.println("Error");
+  				break;
+  			}
   			myList.set(index, x);
   			myList.show();
   			break;
@@ -159,7 +167,7 @@ public class SingleLinkedList implements ILinkedList {
   			myList.show();
   			break;
   		case "isEmpty":
-  			if(myList.isEmpty() == true)
+  			if(myList.isEmpty())
   				System.out.println("True");
   			else
   				System.out.println("False");
@@ -174,11 +182,19 @@ public class SingleLinkedList implements ILinkedList {
   		case "sublist":
   			int firstIndex = sc.nextInt();
   			int lastIndex = sc.nextInt();
+  			if(firstIndex >= (int)myList.getSize() || lastIndex >= (int)myList.getSize()) {
+  				System.out.println("Error");
+  				break;
+  			}
   			SingleLinkedList tempList = (SingleLinkedList)myList.sublist(firstIndex, lastIndex);
   			tempList.show();
   			break;
   		case "contains":
   			x = sc.nextInt();
+  			if(myList.getSize() == 0) {
+  				System.out.println("Error");
+  				break;
+  			}
   			if(myList.contains(x)==true)
   				System.out.println("True");
   			else
@@ -197,7 +213,7 @@ public class SingleLinkedList implements ILinkedList {
 	// Fields
 	private Node head; // This will point to the head node of the linked list
 	private Node tail;	// This will point to the tail node of the linked list
-	private int size;		// This will be the number of elements in the list 
+	private long size;		// This will be the number of elements in the list 
 	
 	// Constructor
 	public SingleLinkedList(Node head){
@@ -249,9 +265,16 @@ public class SingleLinkedList implements ILinkedList {
 			 return;
 		} else {
 			if(index == 0) {		// inserting at the beginning
-				Node newNode = new Node(element,head);
-				head = newNode;
-				this.size++;
+				if(this.getSize() > 0) {
+					Node newNode = new Node(element,head);
+					head = newNode;
+					this.size++;
+				} else {
+					Node newNode = new Node(element,null);
+					head = newNode;
+					tail = newNode;
+					size = 1;
+				}
 				return;
 			}
 			if(index == size-1) {		// inserting at the End
@@ -336,7 +359,7 @@ public class SingleLinkedList implements ILinkedList {
 	}
 
 	public boolean isEmpty() {
-		if(head == null && tail == null && size == 0) {
+		if(head == null || tail == null || size == 0) {
 			return true;
 		} else
 			return false;
