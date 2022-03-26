@@ -137,7 +137,7 @@ public class SingleLinkedList implements ILinkedList {
   		case "addToIndex":
   			index = sc.nextInt();
   			x = sc.nextInt();
-  			if(index >= (int)myList.getSize()) {
+  			if(index >= (int)myList.getSize() || index < 0) {
   				System.out.println("Error");
   				break;
   			}
@@ -155,6 +155,10 @@ public class SingleLinkedList implements ILinkedList {
   		case "set":
   			index = sc.nextInt();
   			x = sc.nextInt();
+  			if (index < 0) {
+  				System.out.println("Error");
+  				break;  			
+  			}
   			if(index >= (int)myList.getSize()) {
   				System.out.println("Error");
   				break;
@@ -174,6 +178,10 @@ public class SingleLinkedList implements ILinkedList {
   			break;
   		case "remove":
   			index = sc.nextInt();
+  			if (index < 0 || index >= myList.getSize()) {
+  				System.out.println("Error");
+  				break;  			
+  			}
   			boolean temp__ = (index < myList.getSize());
   			myList.remove(index);
   			if (temp__)
@@ -182,7 +190,7 @@ public class SingleLinkedList implements ILinkedList {
   		case "sublist":
   			int firstIndex = sc.nextInt();
   			int lastIndex = sc.nextInt();
-  			if(firstIndex >= (int)myList.getSize() || lastIndex >= (int)myList.getSize()) {
+  			if(firstIndex < 0 || firstIndex >= (int)myList.getSize() || lastIndex >= (int)myList.getSize() || firstIndex > lastIndex || lastIndex < 0) {
   				System.out.println("Error");
   				break;
   			}
@@ -192,7 +200,7 @@ public class SingleLinkedList implements ILinkedList {
   		case "contains":
   			x = sc.nextInt();
   			if(myList.getSize() == 0) {
-  				System.out.println("Error");
+  				System.out.println("False");
   				break;
   			}
   			if(myList.contains(x)==true)
@@ -203,7 +211,6 @@ public class SingleLinkedList implements ILinkedList {
   		case "size":
   			System.out.println(myList.size());
   			break;
-  				
   		default:
   			System.out.println("Error");
   		}
