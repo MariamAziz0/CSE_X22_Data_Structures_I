@@ -284,13 +284,6 @@ public class SingleLinkedList implements ILinkedList {
 				}
 				return;
 			}
-			if(index == size-1) {		// inserting at the End
-				Node newNode = new Node(element,null);
-				tail.setNext(newNode);
-				tail = newNode;
-				this.size++;
-				return;
-			}
 			 int currentIndex = 0;
 			 Node currentNode = head;
 			 while(currentIndex != index-1 && currentNode.getNext() != null) {
