@@ -70,6 +70,7 @@ public class PolynomialSolver implements IPolynomialSolver{
         char tempChar;
         char tempChar2;
         while(sc.hasNextLine()) {
+        	temp = sc.nextLine();
             switch (temp){
             case "set":
             	tempChar = sc.nextLine().charAt(0);
@@ -111,7 +112,6 @@ public class PolynomialSolver implements IPolynomialSolver{
             	System.out.println("Error");
             	break;
             }
-            temp = sc.nextLine();
         }
         sc.close();
         System.out.println("Finished.");
@@ -129,7 +129,6 @@ public class PolynomialSolver implements IPolynomialSolver{
   		String[] s = sin.split(",");
   		if (s.length == 1 && s[0].isEmpty()) {
   			int[][] arr = {{}};
-  			sc1.close();
   			return arr;
   		} else {
   			int[][] arr = new int[s.length][1];
