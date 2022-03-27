@@ -68,6 +68,7 @@ public class PolynomialSolver implements IPolynomialSolver{
         Scanner sc = new Scanner(System.in);
         String temp = sc.nextLine();
         char tempChar;
+        char tempChar2;
         switch (temp){
         case "set":
         	tempChar = sc.nextLine().charAt(0);
@@ -76,6 +77,33 @@ public class PolynomialSolver implements IPolynomialSolver{
         case "print":
         	tempChar = sc.nextLine().charAt(0);
         	x.print(tempChar);
+        	break;
+        case "add":
+        	tempChar = sc.nextLine().charAt(0);
+        	tempChar2 = sc.nextLine().charAt(0);
+        	x.setPolynomial('R', x.add(tempChar,tempChar2));
+        	x.print('R');
+        	break;
+        case "sub":
+        	tempChar = sc.nextLine().charAt(0);
+        	tempChar2 = sc.nextLine().charAt(0);
+        	x.setPolynomial('R', x.subtract(tempChar,tempChar2));
+        	x.print('R');
+        	break;
+        case "mult":
+        	tempChar = sc.nextLine().charAt(0);
+        	tempChar2 = sc.nextLine().charAt(0);
+        	x.setPolynomial('R', x.multiply(tempChar,tempChar2));
+        	x.print('R');
+        	break;
+        case "clear":
+        	tempChar = sc.nextLine().charAt(0);
+        	x.clearPolynomial(tempChar);
+        	break;
+        case "eval":
+        	tempChar = sc.nextLine().charAt(0);
+        	int tempVar = sc.nextInt();
+        	System.out.println(x.evaluatePolynomial(tempChar, tempVar));
         	break;
         default:
         	System.out.println("Error");
