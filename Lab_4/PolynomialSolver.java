@@ -81,7 +81,8 @@ public class PolynomialSolver implements IPolynomialSolver{
         	System.out.println("Error");
         	break;
         }
-        if(sc.hasNextLine()) {temp = sc.nextLine();}
+        if(sc.hasNextLine()) {System.out.println("Yes"); temp = sc.nextLine();}
+        else {System.out.println("No");}
 //        switch (temp){
 //        case "set":
 //        	tempChar = sc.nextLine().charAt(0);
@@ -136,7 +137,6 @@ public class PolynomialSolver implements IPolynomialSolver{
   			for(int i = 0; i < s.length; i++) {
   				arr[i][0] = Integer.parseInt(s[i]);
   			}
-  			sc1.close();
   			return arr;
   		}
     }
