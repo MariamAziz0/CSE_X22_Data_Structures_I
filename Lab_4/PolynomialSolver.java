@@ -69,81 +69,52 @@ public class PolynomialSolver implements IPolynomialSolver{
         String temp = sc.nextLine();
         char tempChar;
         char tempChar2;
-        switch (temp){
-        case "set":
-        	tempChar = sc.nextLine().charAt(0);
-        	x.setPolynomial(tempChar, readArr());
-        	break;
-        case "print":
-        	tempChar = sc.nextLine().charAt(0);
-        	x.print(tempChar);
-        	break;
-        case "add":
-        	tempChar = sc.nextLine().charAt(0);
-        	tempChar2 = sc.nextLine().charAt(0);
-        	x.setPolynomial('R', x.add(tempChar,tempChar2));
-        	x.print('R');
-        	break;
-        case "sub":
-        	tempChar = sc.nextLine().charAt(0);
-        	tempChar2 = sc.nextLine().charAt(0);
-        	x.setPolynomial('R', x.subtract(tempChar,tempChar2));
-        	x.print('R');
-        	break;
-        case "mult":
-        	tempChar = sc.nextLine().charAt(0);
-        	tempChar2 = sc.nextLine().charAt(0);
-        	x.setPolynomial('R', x.multiply(tempChar,tempChar2));
-        	x.print('R');
-        	break;
-        case "clear":
-        	tempChar = sc.nextLine().charAt(0);
-        	x.clearPolynomial(tempChar);
-        	break;
-        case "eval":
-        	tempChar = sc.nextLine().charAt(0);
-        	int tempVar = sc.nextInt();
-        	System.out.println(x.evaluatePolynomial(tempChar, tempVar));
-        	break;
-        default:
-        	System.out.println("Error");
-        	break;
+        while(sc.hasNextLine()) {
+            switch (temp){
+            case "set":
+            	tempChar = sc.nextLine().charAt(0);
+            	x.setPolynomial(tempChar, readArr());
+            	break;
+            case "print":
+            	tempChar = sc.nextLine().charAt(0);
+            	x.print(tempChar);
+            	break;
+            case "add":
+            	tempChar = sc.nextLine().charAt(0);
+            	tempChar2 = sc.nextLine().charAt(0);
+            	x.setPolynomial('R', x.add(tempChar,tempChar2));
+            	x.print('R');
+            	break;
+            case "sub":
+            	tempChar = sc.nextLine().charAt(0);
+            	tempChar2 = sc.nextLine().charAt(0);
+            	x.setPolynomial('R', x.subtract(tempChar,tempChar2));
+            	x.print('R');
+            	break;
+            case "mult":
+            	tempChar = sc.nextLine().charAt(0);
+            	tempChar2 = sc.nextLine().charAt(0);
+            	x.setPolynomial('R', x.multiply(tempChar,tempChar2));
+            	x.print('R');
+            	break;
+            case "clear":
+            	tempChar = sc.nextLine().charAt(0);
+            	x.clearPolynomial(tempChar);
+            	x.print(tempChar);
+            	break;
+            case "eval":
+            	tempChar = sc.nextLine().charAt(0);
+            	int tempVar = sc.nextInt();
+            	System.out.println(x.evaluatePolynomial(tempChar, tempVar));
+            	break;
+            default:
+            	System.out.println("Error");
+            	break;
+            }
+            temp = sc.nextLine();
         }
-        if(sc.hasNextLine()) {System.out.println("Yes"); temp = sc.nextLine();}
-        else {System.out.println("No");}
-//        switch (temp){
-//        case "set":
-//        	tempChar = sc.nextLine().charAt(0);
-//        	x.setPolynomial(tempChar, readArr());
-//        	break;
-//        case "print":
-//        	tempChar = sc.nextLine().charAt(0);
-//        	x.print(tempChar);
-//        	break;
-//        default:
-//        	System.out.println("Error");
-//        }
-//        while(sc.hasNextLine()) {
-//            switch (temp){
-//            case "set":
-//            	tempChar = sc.nextLine().charAt(0);
-//            	x.setPolynomial(tempChar, readArr());
-//            	break;
-//            case "print":
-//            	tempChar = sc.nextLine().charAt(0);
-//            	x.print(tempChar);
-//            	break;
-//            default:
-//            	System.out.println("Error");
-//            	temp = sc.nextLine();
-//            }
-//        }
         sc.close();
         System.out.println("Finished.");
-//        x.setPolynomial('A',readArr());
-//        x.setPolynomial('B',readArr());
-//        x.setPolynomial('R',x.multiply('A','B'));
-//        x.print('R');
     }
     
     // Statics Fields Of Class "PolynomialSolver"
