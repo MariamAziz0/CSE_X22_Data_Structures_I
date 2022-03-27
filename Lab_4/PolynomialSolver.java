@@ -65,7 +65,7 @@ public class PolynomialSolver implements IPolynomialSolver{
     public static void main(String[] args) {
          /* Enter your code here. Read input from STDIN. Print output to STDOUT. Your class should be named Solution. */
         PolynomialSolver x = new PolynomialSolver();
-        Scanner sc = new Scanner(System.in);
+        Scanner sc = new Scanner("test.txt");
         String temp = sc.nextLine();
         char tempChar;
         switch (temp){
