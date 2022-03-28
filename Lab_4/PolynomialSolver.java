@@ -525,21 +525,22 @@ public class PolynomialSolver implements IPolynomialSolver{
         	int skip = 0;
         	while((int)arr[tempIndex].get((int)(arr[tempIndex].getSize()-1-skip)) == 0) {skip++;}
             if((int)arr[tempIndex].get((int)arr[tempIndex].getSize()-1-skip)!=1 && (int)arr[tempIndex].get((int)arr[tempIndex].getSize()-1-skip)!=0 && (int)arr[tempIndex].get((int)arr[tempIndex].getSize()-1-skip)!=-1) {System.out.print((int)arr[tempIndex].get((int)arr[tempIndex].getSize()-1-skip));}
-            if((int)arr[tempIndex].get((int)arr[tempIndex].getSize()-1-skip)== -1){System.out.print("-");}
+            if((int)arr[tempIndex].get((int)arr[tempIndex].getSize()-1-skip)== -1){System.out.print("-1");}
             if((int)arr[tempIndex].getSize()-1-skip !=1 && (int)arr[tempIndex].getSize()-1-skip != 0) {
                 System.out.print("x");
                 System.out.print("^"+(int)(arr[tempIndex].getSize()-1));ind = true;
                 }
             if((int)arr[tempIndex].getSize()-1-skip == 1) {System.out.print("x");ind = true;}
         for(int i = (int)arr[tempIndex].getSize()-2-skip; i > 0 ; i--) {
-            if((int)arr[tempIndex].get(i)<0) {System.out.print("-");}else {System.out.print("+");}
+            if((int)arr[tempIndex].get(i)<0) {System.out.print("-");}
+            else if((int)arr[tempIndex].get(i)>0){System.out.print("+");}
             if((int)arr[tempIndex].get(i)!=1 && (int)arr[tempIndex].get(i)!=0 && (int)arr[tempIndex].get(i)!=-1) {System.out.print(Math.abs((int)arr[tempIndex].get(i)));}
             if((int)arr[tempIndex].get(i)== -1){System.out.print("1");}
             if(i !=1 && i != 0) {
                 System.out.print("x");
                 System.out.print("^"+i);
                 }
-            if(i == 1) {System.out.print("x");}
+            if(i == 1 && (int)arr[tempIndex].get(i)!=0) {System.out.print("x");}
         }
         if((int)arr[tempIndex].get(0) != 0 && !ind) {System.out.print(arr[tempIndex].get(0));}
         if((int)arr[tempIndex].get(0) != 0 && (int)arr[tempIndex].get(0) > 0 && ind) {System.out.print("+" +(int)arr[tempIndex].get(0)+"\n");}
