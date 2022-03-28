@@ -504,7 +504,7 @@ public class PolynomialSolver implements IPolynomialSolver{
     // Manipulation Methods
     @Override
     public void setPolynomial(char poly, int[][] terms) {
-    	if (terms[0].length == 0) {System.out.println("Error");System.exit(0);}
+        if (terms[0].length == 0) {System.out.println("Error");System.exit(0);}
         arrChar[arrIndex] = poly;
         SingleLinkedList.Node myNode = new SingleLinkedList.Node(null,null);
         arr[arrIndex] = new SingleLinkedList(myNode);
@@ -518,37 +518,132 @@ public class PolynomialSolver implements IPolynomialSolver{
     
     @Override
     public String print(char poly) {
-        // TODO Auto-generated method stub
-        int tempIndex = searchForChar(poly);
-        if(arr[tempIndex].getSize()>0) {
-        	boolean ind = false;
-        	int skip = 0;
-        	while((int)arr[tempIndex].get((int)(arr[tempIndex].getSize()-1-skip)) == 0) {skip++;}
-            if((int)arr[tempIndex].get((int)arr[tempIndex].getSize()-1-skip)!=1 && (int)arr[tempIndex].get((int)arr[tempIndex].getSize()-1-skip)!=0 && (int)arr[tempIndex].get((int)arr[tempIndex].getSize()-1-skip)!=-1) {System.out.print((int)arr[tempIndex].get((int)arr[tempIndex].getSize()-1-skip));}
-            if((int)arr[tempIndex].get((int)arr[tempIndex].getSize()-1-skip)== -1){System.out.print("-1");}
-            if((int)arr[tempIndex].getSize()-1-skip !=1 && (int)arr[tempIndex].getSize()-1-skip != 0) {
-                System.out.print("x");
-                System.out.print("^"+(int)(arr[tempIndex].getSize()-1));ind = true;
-                }
-            if((int)arr[tempIndex].getSize()-1-skip == 1) {System.out.print("x");ind = true;}
-        for(int i = (int)arr[tempIndex].getSize()-2-skip; i > 0 ; i--) {
-            if((int)arr[tempIndex].get(i)<0) {System.out.print("-");}
-            else if((int)arr[tempIndex].get(i)>0){System.out.print("+");}
-            if((int)arr[tempIndex].get(i)!=1 && (int)arr[tempIndex].get(i)!=0 && (int)arr[tempIndex].get(i)!=-1) {System.out.print(Math.abs((int)arr[tempIndex].get(i)));}
-            if((int)arr[tempIndex].get(i)== -1){System.out.print("1");}
-            if(i !=1 && i != 0) {
-                System.out.print("x");
-                System.out.print("^"+i);
-                }
-            if(i == 1 && (int)arr[tempIndex].get(i)!=0) {System.out.print("x");}
+        String s="" ;
+        int index =searchForChar(poly);
+        int n=0;
+        if(arr[index] !=null){
+            n=(int)arr[index].getSize();
         }
-        if((int)arr[tempIndex].get(0) != 0 && !ind) {System.out.print(arr[tempIndex].get(0));}
-        if((int)arr[tempIndex].get(0) != 0 && (int)arr[tempIndex].get(0) > 0 && ind) {System.out.print("+" +(int)arr[tempIndex].get(0)+"\n");}
-        else if((int)arr[tempIndex].get(0) < 0) {System.out.print("-" +Math.abs((int)arr[tempIndex].get(0))+"\n");}
+     if(n != 0) {   
+        if(n-1>=2) {
+            if((int)arr[index].get(n-1) !=0 && (int)arr[index].get(n-1) !=1) {
+                s+=String.valueOf((int) arr[index].get(n-1));
+                s+=("x^");
+                s+=String.valueOf(n-1);
+            }
+            
+            else if((int)arr[index].get(n-1)==1) {
+                s+=("x^");
+                s+=String.valueOf(n-1);
+            }
+        
         }
-        else System.out.println("[]") ;
-        return null;
+        else if(n-1==1) {
+            if((int)arr[index].get(n-1) !=0  && (int)arr[index].get(n-1) !=1) {
+                s+=String.valueOf((int) arr[index].get(n-1));
+                
+                s+=("x");
+                
+                }
+                else if((int)arr[index].get(n-1)==1) {
+                    s+=("x");
+                }
+                
+        }
+        else if(n-1==0) {
+            if((int)arr[index].get(n-1) !=0) {
+                s+=String.valueOf((int) arr[index].get(n-1));
+        }
+        }
+        
+        for(int i=n-2;i>=0;i--) {
+            if(i==1) {
+                if((int)arr[index].get(i) > 0 && s != "") {
+                    s+="+";
+                }
+                if((int)arr[index].get(i) !=0  && (int)arr[index].get(i) !=1) {
+                s+=String.valueOf((int) arr[index].get(i));
+                
+                s+=("x");
+                
+                }
+                else if((int)arr[index].get(i)==1) {
+                    s+=("x");
+                }
+                
+            }
+            else if(i==0) {
+                if((int)arr[index].get(i) > 0 && s!="") {
+                    s+="+";
+                }
+                if((int)arr[index].get(i) !=0) {
+                s+=String.valueOf((int) arr[index].get(i));
+                
+            }
+            }
+            else {
+                if((int)arr[index].get(i) > 0 && s!="") {
+                    s+="+";
+                }
+                if((int)arr[index].get(i) !=0 && (int)arr[index].get(i) !=-1 && (int)arr[index].get(i) !=1) {
+                    s+=String.valueOf((int) arr[index].get(i));
+                    s+=("x^");
+                    s+=String.valueOf(i);
+                    
+                    }
+            
+                else if((int)arr[index].get(i)==1) {
+                        s+=("x^");
+                        s+=String.valueOf(i);
+                    }
+                
+                }
+        }
+            
+       
+      System.out.println(s);
+     }
+     else { 
+    	 System.out.println("[]");
+    	 return "Error";
+     }
+     if(s.isEmpty()) {System.out.println("[]");}
+     return s;
+        
     }
+// --------------------------------------------------------------------------------
+//    public String print(char poly) {
+//        // TODO Auto-generated method stub
+//        int tempIndex = searchForChar(poly);
+//        if(arr[tempIndex].getSize()>0) {
+//            boolean ind = false;
+//            int skip = 0;
+//            while((int)arr[tempIndex].get((int)(arr[tempIndex].getSize()-1-skip)) == 0) {skip++;}
+//            if((int)arr[tempIndex].get((int)arr[tempIndex].getSize()-1-skip)!=1 && (int)arr[tempIndex].get((int)arr[tempIndex].getSize()-1-skip)!=0 && (int)arr[tempIndex].get((int)arr[tempIndex].getSize()-1-skip)!=-1) {System.out.print((int)arr[tempIndex].get((int)arr[tempIndex].getSize()-1-skip));}
+//            if((int)arr[tempIndex].get((int)arr[tempIndex].getSize()-1-skip)== -1){System.out.print("-1");}
+//            if((int)arr[tempIndex].getSize()-1-skip !=1 && (int)arr[tempIndex].getSize()-1-skip != 0) {
+//                System.out.print("x");
+//                System.out.print("^"+(int)(arr[tempIndex].getSize()-1));ind = true;
+//                }
+//            if((int)arr[tempIndex].getSize()-1-skip == 1) {System.out.print("x");ind = true;}
+//        for(int i = (int)arr[tempIndex].getSize()-2-skip; i > 0 ; i--) {
+//            if((int)arr[tempIndex].get(i)<0) {System.out.print("-");}
+//            else if((int)arr[tempIndex].get(i)>0){System.out.print("+");}
+//            if((int)arr[tempIndex].get(i)!=1 && (int)arr[tempIndex].get(i)!=0 && (int)arr[tempIndex].get(i)!=-1) {System.out.print(Math.abs((int)arr[tempIndex].get(i)));}
+//            if((int)arr[tempIndex].get(i)== -1){System.out.print("1");}
+//            if(i !=1 && i != 0) {
+//                System.out.print("x");
+//                System.out.print("^"+i);
+//                }
+//            if(i == 1 && (int)arr[tempIndex].get(i)!=0) {System.out.print("x");}
+//        }
+//        if((int)arr[tempIndex].get(0) != 0 && !ind) {System.out.print(arr[tempIndex].get(0));}
+//        if((int)arr[tempIndex].get(0) != 0 && (int)arr[tempIndex].get(0) > 0 && ind) {System.out.print("+" +(int)arr[tempIndex].get(0)+"\n");}
+//        else if((int)arr[tempIndex].get(0) < 0) {System.out.print("-" +Math.abs((int)arr[tempIndex].get(0))+"\n");}
+//        }
+//        else System.out.println("[]") ;
+//        return null;
+//    }
 
     @Override
     public void clearPolynomial(char poly) {
