@@ -180,11 +180,20 @@ public class Evaluator implements IExpressionEvaluator {
     	a = EV.scanNum(sc.nextLine());
     	b = EV.scanNum(sc.nextLine());
     	c = EV.scanNum(sc.nextLine());
+    	if(a == -139851935 || b == -139851935 || c == -139851935) {
+    		System.out.println("Error");
+    		System.exit(0);
+    	}
 //    	System.out.println(expression + "\n"+ a + "\n" + b + "\n" + c);
     	expression = EV.clean(expression);
 //    	System.out.println(expression);
-    	System.out.println(EV.infixToPostfix(expression));
-    	System.out.println(EV.evaluate(EV.ReplaceVar(EV.infixToPostfix(expression),a,b,c)));
+    	if(expression.compareTo("Error") == 0) {
+    		System.out.println("Error");
+    		System.exit(0);
+    	}
+    	System.out.println(EV.infixToPostfix(expression) );
+    	if(EV.infixToPostfix(expression).compareTo("Error") != 0)
+    		System.out.println(EV.evaluate(EV.ReplaceVar(EV.infixToPostfix(expression),a,b,c)));
     	sc.close();
     }
     
@@ -240,14 +249,20 @@ public class Evaluator implements IExpressionEvaluator {
     	int Num;
     	String stNum = "";
     	String toBeIgnored = "abc=";
+    	String Considered = "0123456789-";
     	for(int i = 0 ; i < Input.length() ; i++) {
     		if(  toBeIgnored.contains( ("" + Input.charAt(i)) )  ) {
     			continue;
     		} else {
-    			stNum += Input.charAt(i);
+    			if(Considered.contains( ("" + Input.charAt(i)))){ 
+    				stNum += Input.charAt(i);
+    			}
     		}
     	}
-    	Num = Integer.parseInt(stNum);
+    	if(stNum.length() == 0) {
+    		Num = -139851935;
+    	} else
+    		Num = Integer.parseInt(stNum);
     	return Num;
     }
     
@@ -263,6 +278,11 @@ public class Evaluator implements IExpressionEvaluator {
     }
     
     public String clean(String str) {
+    	String Avoid1 = "*/^" ;
+    	String Avoid2 = "*/^+-" ;
+    	if( Avoid1.contains("" + str.charAt(0)) || Avoid2.contains("" + str.charAt(str.length()-1)) ){
+    		return "Error";
+    	}
     	String ans = "";
     	boolean skipFlag = false;
     	for(int i = 0 ; i < str.length()-1 ; i++) {
@@ -272,16 +292,26 @@ public class Evaluator implements IExpressionEvaluator {
     		}
     		char temp = str.charAt(i);
     		char temp2 = str.charAt(i+1); 
-    		if(temp == temp2 && (temp == '-' || temp == '+')) {
-    			
-    			if(i == 0) {
-    				skipFlag = true;
-    				continue;
-    			} else {
-    				ans += '+';
-    				skipFlag = true;
-    			} 		
-    		} else {
+    		if(temp == temp2) {
+    			if(temp == '-' || temp == '+') {
+    				if(i == 0) {
+    					skipFlag = true;
+    					continue;
+    				} else {
+    					if( "+-/*^".contains("" + str.charAt(i-1)) ){
+    						skipFlag = true;
+    						continue;
+    					} else {
+    					ans += '+';
+    					skipFlag = true;
+    					}
+    				} 		
+    			}
+    			else if( temp == '^' || temp == '/' || temp == '*') {
+    				return "Error";
+    			}
+    	}
+    		else {
     			ans += temp;
     			skipFlag = false;
     		}
@@ -298,7 +328,8 @@ public class Evaluator implements IExpressionEvaluator {
 		String Operands = "abc";
 		String Operators = "+-/*^";
 		String Parenthesis ="()";
-		boolean ParenthesisFlag = false;
+		int ParenthesisCounter = 0;
+//		boolean ParenthesisFlag = false;
 		MyStack EvaluatorStack = new MyStack(); 
  		for(int i = 0 ; i < expression.length() ; i++) {
  			String x = "" + expression.charAt(i);
@@ -308,6 +339,11 @@ public class Evaluator implements IExpressionEvaluator {
 			}
 			
 			else if (Operators.contains(x)) {
+//				if(i>0){
+//					if( Operators.contains("" + expression.charAt(i-1) ) && x.compareTo("" + expression.charAt(i-1)) != 0  ) {
+//					return "Error";
+//					}
+//				}
 				boolean FinishFlag = false;
 				while(EvaluatorStack.size() > 0 && !FinishFlag) {
 					if(getPrecedence(x) > getPrecedence((String)EvaluatorStack.peek())) {
@@ -325,28 +361,33 @@ public class Evaluator implements IExpressionEvaluator {
 			else if(Parenthesis.contains(x)) {
 				if(x.compareTo("(") == 0) {
 					EvaluatorStack.push(x);
-					ParenthesisFlag = true;
+					ParenthesisCounter++;
+//					ParenthesisFlag = true;
 				}
-				else if(ParenthesisFlag && EvaluatorStack.size() > 0){
+				else if(ParenthesisCounter > 0 && EvaluatorStack.size() > 0){
 					while( ((String)EvaluatorStack.peek()).compareTo("(") != 0   && EvaluatorStack.size() > 0) {
 						ans += (String)EvaluatorStack.pop();
 					}
 					EvaluatorStack.pop();
-					ParenthesisFlag = false;
+					ParenthesisCounter--;
+//					ParenthesisFlag = false;
 				 }
 				else return "Error";
 			}
+			else return "Error";
 		}
  		
  		// Handling the Remaining Elements in the Stack
  		while(EvaluatorStack.size()>0) {
- 			if(EvaluatorStack.peek() == "(" || EvaluatorStack.peek() == ")") {
- 				System.out.println("Error");
- 				break;
+ 			if(EvaluatorStack.peek() == "(" || EvaluatorStack.peek() == ")" || ParenthesisCounter != 0) {
+ 				return "Error" ;
  			}
  			else {
  				ans += (String)EvaluatorStack.pop();
  			}
+ 		}
+ 		if (ans.length() == 0) {
+ 			return "Error";
  		}
 		return ans;
 	}
