@@ -70,8 +70,18 @@ class Node {
 	
 }
 
+/**
+ * CSED - Level 1 - Term 2 - Course: DS I - Lab 5, "MyStack"  
+ * Class Implements the Stack Data Structure using doubly linked list.
+ * @author George Samy Wahba Beshay
+ *
+ */
 public class MyStack implements IStack {
 
+	/**
+	 * Main Method.
+	 * @param args
+	 */
     public static void main(String[] args) {
         /* Enter your code here. Read input from STDIN. Print output to STDOUT. Your class should be named Solution. */
     	Scanner sc = new Scanner(System.in);
@@ -142,7 +152,13 @@ public class MyStack implements IStack {
     }
 
     // Fields
+    /**
+     * Field Size: Number of elements in the stack.
+     */
     private int Size = 0;
+    /**
+     * Field top: Pointing the Top node that is accessible.
+     */
     private Node top = null;
     
 	@Override
@@ -200,6 +216,9 @@ public class MyStack implements IStack {
 		return Size;
 	}
 	
+	/**
+	 * Method Objective: Print the stack to show its content, FOR ADMIN ONLY.
+	 */
 	public void show() {
 		if(this.size() == 0) {
 			System.out.println("[]");

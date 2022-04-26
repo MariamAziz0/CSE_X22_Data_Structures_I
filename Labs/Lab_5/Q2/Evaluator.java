@@ -144,6 +144,7 @@ class MyStack implements IStack {
 		System.out.print((String)temp.getElement()+"]\n");
 	}
 }
+
 interface IExpressionEvaluator {
   
 /**
@@ -168,7 +169,12 @@ public int evaluate(String expression);
 
 }
 
-
+/**
+ * CSED - Level 1 - Term 2 - Course: DS I - Lab 5,
+ * "Evaluator Class" To convert from infix to postfix and evaluate the expression value. 
+ * PRE-Implemented Stack has been used.
+ * @author George Samy Wahba Beshay
+ */
 public class Evaluator implements IExpressionEvaluator {
   
     public static void main(String[] args) {
@@ -197,6 +203,14 @@ public class Evaluator implements IExpressionEvaluator {
     	sc.close();
     }
     
+    /**
+     * Method Objective: Iterating over the input expression and substitue each variable with its given value
+     * @param expression : Input Expression.
+     * @param a	: Variable a value.
+     * @param b : Variable b value.
+     * @param c : Variable c value.
+     * @return Expression String in terms of VALUES not VARIABLES. 
+     */
     public String ReplaceVar(String expression, int a, int b, int c) {
     	String ans = "";
     	String aStr = "" ,bStr = "" ,cStr = "";
@@ -245,6 +259,11 @@ public class Evaluator implements IExpressionEvaluator {
     	return ans;
     }
 
+    /**
+     * Method Objective: Scan the input variables - values "a= .."
+     * @param Input : Input line as a string.
+     * @return variable value as an int data type.
+     */
     public int scanNum(String Input) {
     	int Num;
     	String stNum = "";
@@ -266,6 +285,11 @@ public class Evaluator implements IExpressionEvaluator {
     	return Num;
     }
     
+    /**
+     * Method Objective: Detect the precedence of the operator.
+     * @param x : Operator to get the precedence of.
+     * @return int value representing the precedence level of the given operator.
+     */
     public int getPrecedence(String x) {		// Level 2 >>> Level 1
     	int level = 0;				// x == '*' or '/'		
      	if (x.equals("+") || x .equals("-"))
@@ -277,6 +301,11 @@ public class Evaluator implements IExpressionEvaluator {
     	return level;
     }
     
+    /**
+     * Method Objective: Purify & Clean the given expression removing all useless characters like ++ and --.
+     * @param str : Input non - purified Expression.
+     * @return  Output purified Expression.
+     */
     public String clean(String str) {
     	String Avoid1 = "*/^" ;
     	String Avoid2 = "*/^+-" ;
@@ -322,6 +351,14 @@ public class Evaluator implements IExpressionEvaluator {
     }
     
 	@Override
+	/**
+	* Takes a symbolic/numeric infix expression as input and converts it to
+	* postfix notation. There is no assumption on spaces between terms or the
+	* length of the term (e.g., two digits symbolic or numeric term)
+	*
+	* @param expression infix expression
+	* @return postfix expression
+	*/
 	public String infixToPostfix(String expression) {
 		// TODO Auto-generated method stub
 		String ans = "";
@@ -392,6 +429,9 @@ public class Evaluator implements IExpressionEvaluator {
 		return ans;
 	}
 
+	/**
+	 * 
+	 */
 	@Override
 	public int evaluate(String expression) {
 		// TODO Auto-generated method stub
