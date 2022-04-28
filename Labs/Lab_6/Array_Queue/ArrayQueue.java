@@ -63,19 +63,33 @@ public class ArrayQueue implements IQueue {
 		
 		// Copying Elements to Queue.
 		ArrayQueue myQueue = new ArrayQueue();
-		for(int i = arr.length-1 ; i >= 0 ; i--) {
+		for(int i = 0 ; i < arr.length ; i++) {
 			myQueue.enqueue(arr[i]);
 		}
 		
 		String tempChoice = sc.nextLine();
 		switch(tempChoice){
 			case "enqueue":
+				int tempValue = sc.nextInt();
+				myQueue.enqueue(tempValue);
+				myQueue.show();
 				break;
 			case "dequeue":
+				if(myQueue.size() == 0) {
+					System.out.println("Error");
+					break;
+				}
+				myQueue.dequeue();
+				myQueue.show();
 				break;
 			case "isEmpty":
+				if(myQueue.isEmpty())
+					System.out.println("True");
+				else
+					System.out.println("False");
 				break;
 			case "size":
+				System.out.println(myQueue.size());
 				break;
 			default:
 				System.out.println("Error");
@@ -140,10 +154,20 @@ public class ArrayQueue implements IQueue {
 	public void show() {
 		System.out.print("[");
 		if(this.Current_Size > 0) {
-			int tempIndex = this.F;
+			int tempIndex;
+			if(this.R > 0) {
+				tempIndex = this.R-1;
+			} else {
+				tempIndex = this.Max_Size;
+			}
+			
 			for(int i = 0 ; i < this.Current_Size - 1 ; i++) {
 				System.out.print((int)Array[tempIndex]+ ", ");
-				tempIndex++;
+				if(tempIndex > 0) {
+					tempIndex--;
+				} else {
+					tempIndex = this.Max_Size;
+				}
 			}
 			System.out.print((int)Array[tempIndex]);
 		}
