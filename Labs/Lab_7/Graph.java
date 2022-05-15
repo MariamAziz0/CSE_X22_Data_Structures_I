@@ -11,8 +11,8 @@ public class Graph {
 		if(Map.length >= 1) {
 			this.numOfNodes = Map.length * Map[0].length;
 			
-			GraphNode First = new GraphNode(Map[0][0], 0, 0);
-			GraphNode current = First;
+//			GraphNode First = new GraphNode(Map[0][0], 0, 0);
+//			GraphNode current = First;
 			GraphNode[][] NodesArray = new GraphNode[Map.length][Map[0].length];
 			
 			for(int i = 0 ; i < Map.length ; i++) {
@@ -41,7 +41,10 @@ public class Graph {
 							NodesArray[i][j].getAdjGNs()[1] = NodesArray[i][j+1];
 						}
 						
+						
+						System.out.print(NodesArray[i][j].getObj()+" ");
 				}
+				System.out.print("\n");
 			}
 		} else {
 			this.numOfNodes = 0;

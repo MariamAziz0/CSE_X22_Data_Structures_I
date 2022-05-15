@@ -1,6 +1,7 @@
 package Labs.Lab_7;
 
 import java.awt.Point;
+import java.util.*;
 
 public class MazeSolver{
 	
@@ -12,15 +13,15 @@ public class MazeSolver{
 //	@Override
 	public int[][] solveBFS(char[][] Map){
 		Point[] Path;
-		int PointsCounter = 0;
-		LLQueue myQueue = new LLQueue();
+		Queue<GraphNode> myQueue = new LinkedList<>();
+		Stack<Point> myStack = new Stack();
 		Graph myGraph = new Graph(Map);
 		GraphNode temp = myGraph.getStart();
-		myQueue.enqueue(temp);
+		myQueue.add(temp);
 		temp.setVisitedFlag(true);
 		
-		while(!myQueue.isEmpty()) {
-			temp = myQueue.dequeue();
+		while(myQueue.size() > 0) {
+			temp = myQueue.remove();
 			temp.setVisitedFlag(true);
 			if(temp.getObj() == 'E') {
 				break;
@@ -28,37 +29,44 @@ public class MazeSolver{
 			for(int i = 0 ; i < 4 ; i++) {
 				if(temp.getAdjGNs()[i] != null){	
 					if( !temp.getAdjGNs()[i].isVisitedFlag() && temp.getAdjGNs()[i].getObj() != '#') {
-						myQueue.enqueue(temp.getAdjGNs()[i]);
+						myQueue.add(temp.getAdjGNs()[i]);
 						temp.getAdjGNs()[i].setP(temp);
 					}
 				}
 			}
-			PointsCounter++;
 		}
 		
-		Path = new Point[50];
-		int u = 49;
+		
+		
+//		Path = new Point[50];
+//		int u = 49;
 		GraphNode tempPRO = temp;
-		while(tempPRO.getP() != null) {
-			if(tempPRO.getP() == null) {
-				System.out.println("WARNING: In SolveDFS >> \"While(PointsCounter >= 0)\"");
-				Path[u] = new Point(tempPRO.getX(),tempPRO.getY());
-				tempPRO = null;
-			} else {
-			Path[u] = new Point(tempPRO.getX(),tempPRO.getY());
+		while(tempPRO != null) {
+			myStack.push(new Point(tempPRO.getX(), tempPRO.getY()));
 			tempPRO = tempPRO.getP();
-//			PointsCounter--;
-			}
-			u--;
 		}
+//		while(tempPRO.getP() != null) {
+//			if(tempPRO.getP() == null) {
+//				System.out.println("WARNING: In SolveDFS >> \"While(PointsCounter >= 0)\"");
+//				Path[u] = new Point(tempPRO.getX(),tempPRO.getY());
+//				tempPRO = null;
+//			} else {
+//			Path[u] = new Point(tempPRO.getX(),tempPRO.getY());
+//			tempPRO = tempPRO.getP();
+////			PointsCounter--;
+//			}
+//			u--;
+//		}
 		
-		// Printing 
+		// Printing
+		Point tempNewPRO;
 		System.out.print("[");
-		while(u < 49) {
-			System.out.print("(" +Path[u].x + ", " + Path[u].y +  "), ");
-			u++;
+		while(myStack.size() > 1) {
+			tempNewPRO = myStack.pop();
+			System.out.print("(" +tempNewPRO.x + ", " + tempNewPRO.y +  "), ");
 		}
-		System.out.print("(" +Path[49].x + ", " + Path[49].y +  ")]");
+		tempNewPRO = myStack.pop();
+		System.out.print("(" +tempNewPRO.x + ", " + tempNewPRO.y +  ")]");
 		return null;
 	}
 	
