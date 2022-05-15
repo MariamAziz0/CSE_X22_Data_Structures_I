@@ -119,7 +119,7 @@ public class MazeSolver implements IMazeSolver{
 				}
 			}
 		}
-		
+		System.out.print("Error");
 		return null;
 		}
 		catch(Exception e) {
