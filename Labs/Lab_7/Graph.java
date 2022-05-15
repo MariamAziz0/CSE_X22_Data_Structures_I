@@ -41,10 +41,7 @@ public class Graph {
 							NodesArray[i][j].getAdjGNs()[1] = NodesArray[i][j+1];
 						}
 						
-						
-						System.out.print(NodesArray[i][j].getObj()+" ");
 				}
-				System.out.print("\n");
 			}
 		} else {
 			this.numOfNodes = 0;

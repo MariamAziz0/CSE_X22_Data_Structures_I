@@ -12,16 +12,18 @@ public class MazeSolver{
 	
 //	@Override
 	public int[][] solveBFS(char[][] Map){
-		Point[] Path;
-		Queue<GraphNode> myQueue = new LinkedList<>();
-		Stack<Point> myStack = new Stack();
+		
+		LLQueue myQueue = new LLQueue();
+		Stack myStack = new Stack();
 		Graph myGraph = new Graph(Map);
 		GraphNode temp = myGraph.getStart();
-		myQueue.add(temp);
+		
+		myQueue.enqueue(temp);
 		temp.setVisitedFlag(true);
 		
 		while(myQueue.size() > 0) {
-			temp = myQueue.remove();
+			
+			temp = myQueue.dequeue();
 			temp.setVisitedFlag(true);
 			if(temp.getObj() == 'E') {
 				break;
@@ -29,45 +31,45 @@ public class MazeSolver{
 			for(int i = 0 ; i < 4 ; i++) {
 				if(temp.getAdjGNs()[i] != null){	
 					if( !temp.getAdjGNs()[i].isVisitedFlag() && temp.getAdjGNs()[i].getObj() != '#') {
-						myQueue.add(temp.getAdjGNs()[i]);
+						myQueue.enqueue(temp.getAdjGNs()[i]);
 						temp.getAdjGNs()[i].setP(temp);
 					}
 				}
 			}
+			
 		}
 		
-		
-		
-//		Path = new Point[50];
-//		int u = 49;
 		GraphNode tempPRO = temp;
+		
 		while(tempPRO != null) {
 			myStack.push(new Point(tempPRO.getX(), tempPRO.getY()));
 			tempPRO = tempPRO.getP();
 		}
-//		while(tempPRO.getP() != null) {
-//			if(tempPRO.getP() == null) {
-//				System.out.println("WARNING: In SolveDFS >> \"While(PointsCounter >= 0)\"");
-//				Path[u] = new Point(tempPRO.getX(),tempPRO.getY());
-//				tempPRO = null;
-//			} else {
-//			Path[u] = new Point(tempPRO.getX(),tempPRO.getY());
-//			tempPRO = tempPRO.getP();
-////			PointsCounter--;
-//			}
-//			u--;
-//		}
 		
 		// Printing
 		Point tempNewPRO;
-		System.out.print("[");
+		Point[] ArrayOfPoints = new Point[myStack.size()]; 
+		int ArrayOfPointsIndex = 0;
+		System.out.print("BFS: ");
 		while(myStack.size() > 1) {
 			tempNewPRO = myStack.pop();
-			System.out.print("(" +tempNewPRO.x + ", " + tempNewPRO.y +  "), ");
+			ArrayOfPoints[ArrayOfPointsIndex] = tempNewPRO;
+			ArrayOfPointsIndex++;
+			System.out.print("{" +tempNewPRO.x + ", " + tempNewPRO.y +  "}, ");
 		}
 		tempNewPRO = myStack.pop();
-		System.out.print("(" +tempNewPRO.x + ", " + tempNewPRO.y +  ")]");
-		return null;
+		System.out.print("{" +tempNewPRO.x + ", " + tempNewPRO.y +  "}");
+		ArrayOfPoints[ArrayOfPointsIndex] = tempNewPRO;
+		return convertFromArrOfPointsToArrOfIntegers(ArrayOfPoints);
+	}
+	
+	public int[][] convertFromArrOfPointsToArrOfIntegers(Point[] Input){
+		int[][] Output = new int[Input.length][2];
+		for(int i = 0 ; i < Input.length ; i++) {
+			Output[i][0] = Input[i].x;
+			Output[i][1] = Input[i].y;
+		}
+		return Output;
 	}
 	
 }

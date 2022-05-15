@@ -11,8 +11,9 @@ public class DriverCode {
 				{'.','#','#','.','.'},
 				{'E','.','.','.','.'},
 				{'.','.','#','#','#'}
-								};
+		};
 		myMazeSolver.solveBFS(Map);
+		
 	}
 
 }

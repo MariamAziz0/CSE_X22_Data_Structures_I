@@ -67,75 +67,71 @@ public class LLQueue {
 		return this.Current_Size;
 	}
 	
-	public void show() {
-		System.out.print("[");
-		if(this.Current_Size > 0) {
-			Node tempNode = this.Last;
-			for(int i = 0 ; i < this.Current_Size - 1 ; i++) {
-				System.out.print("("+(int)tempNode.getElement().getX()+ ", "+(int)tempNode.getElement().getY() + "), ");
-				tempNode = tempNode.getPrev();
-			}
-			System.out.print("("+(int)tempNode.getElement().getX()+ ", "+(int)tempNode.getElement().getY() + ")");
-		}
-		System.out.print("]");
-	}
+//	public void show() {
+//		System.out.print("[");
+//		if(this.Current_Size > 0) {
+//			Node tempNode = this.Last;
+//			for(int i = 0 ; i < this.Current_Size - 1 ; i++) {
+//				System.out.print("("+(int)tempNode.getElement().getX()+ ", "+(int)tempNode.getElement().getY() + "), ");
+//				tempNode = tempNode.getPrev();
+//			}
+//			System.out.print("("+(int)tempNode.getElement().getX()+ ", "+(int)tempNode.getElement().getY() + ")");
+//		}
+//		System.out.print("]");
+//	}
 	
 	
 	
 }
 
-class Node{
-	/*
-	 * Class Fields
-	 */
-	private Node next;
-	private Node prev;
-	private GraphNode element;
-	
-	
-	/*
-	 * Class Constructors
-	 */
-	public Node(GraphNode element,Node prev) {
-		this.element = element;
-		this.prev = prev;
-		this.next = null;
-	}
-	
-	
-	/*
-	 * Class Standard Methods (Getters & Setters) 
-	 */
-	public Node getNext() {
-		return next;
-	}
-
-
-	public void setNext(Node next) {
-		this.next = next;
-	}
-
-
-	public Node getPrev() {
-		return prev;
-	}
-
-
-	public void setPrev(Node prev) {
-		this.prev = prev;
-	}
-
-
-	public GraphNode getElement() {
-		return element;
-	}
-
-
-	public void setElement(GraphNode element) {
-		this.element = element;
-	}
-
-
-	
-	
-}
+//class Node{
+//	/*
+//	 * Class Fields
+//	 */
+//	private Node next;
+//	private Node prev;
+//	private GraphNode element;
+//	
+//	
+//	/*
+//	 * Class Constructors
+//	 */
+//	public Node(GraphNode element,Node prev) {
+//		this.element = element;
+//		this.prev = prev;
+//		this.next = null;
+//	}
+//	
+//	
+//	/*
+//	 * Class Standard Methods (Getters & Setters) 
+//	 */
+//	public Node getNext() {
+//		return next;
+//	}
+//
+//
+//	public void setNext(Node next) {
+//		this.next = next;
+//	}
+//
+//
+//	public Node getPrev() {
+//		return prev;
+//	}
+//
+//
+//	public void setPrev(Node prev) {
+//		this.prev = prev;
+//	}
+//
+//
+//	public GraphNode getElement() {
+//		return element;
+//	}
+//
+//
+//	public void setElement(GraphNode element) {
+//		this.element = element;
+//	}
+//}
